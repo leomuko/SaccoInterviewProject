@@ -1,8 +1,10 @@
-package com.example.sacco;
+package com.example.sacco.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.sacco.R;
 
 public class MainActivity extends AppCompatActivity {
 

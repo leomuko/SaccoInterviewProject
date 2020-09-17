@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    tools:context=".activities.SignIn.SignInActivity">
 
     <EditText
         android:id="@+id/first_name_input"
@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Enter Email"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="@+id/last_name_input"
         app:layout_constraintStart_toStartOf="@+id/last_name_input"
         app:layout_constraintTop_toBottomOf="@+id/last_name_input" />
@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Enter password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/signIn_email_input"
         app:layout_constraintStart_toStartOf="@+id/signIn_email_input"
@@ -62,9 +63,9 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/background_light"
         android:text="Create Account"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintEnd_toEndOf="@+id/siginIn_password_input"
+        app:layout_constraintStart_toStartOf="@+id/siginIn_password_input"
+        app:layout_constraintTop_toBottomOf="@+id/siginIn_password_input" />
 
     <TextView
         android:id="@+id/textView4"
@@ -88,27 +89,5 @@
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/siginIn_password_input"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/siginIn_password_input"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Select Sacco"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/siginIn_password_input" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

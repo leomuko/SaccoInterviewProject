@@ -1,14 +1,16 @@
-package com.example.sacco;
+package com.example.sacco.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SignInActivity extends AppCompatActivity {
+import com.example.sacco.R;
+
+public class SavingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_savings);
     }
 }

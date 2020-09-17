@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "162790963015",
+    "firebase_url": "https://saccotrial.firebaseio.com",
+    "project_id": "saccotrial",
+    "storage_bucket": "saccotrial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162790963015:android:727c3e437ddb05a318be62",
+        "android_client_info": {
+          "package_name": "com.example.sacco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162790963015-nu13r0h0k2kbm0k15clg5fjkjveh37lj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAp17l6Bn-OMsy2tpdcT77qsVI8KZXH0w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162790963015-nu13r0h0k2kbm0k15clg5fjkjveh37lj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
