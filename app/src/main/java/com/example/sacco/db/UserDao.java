@@ -7,6 +7,8 @@ import androidx.room.Query;
 
 import com.example.sacco.models.User;
 
+import java.util.List;
+
 @Dao
 public interface UserDao {
     @Insert()
@@ -17,4 +19,7 @@ public interface UserDao {
 
     @Query("UPDATE user_table SET savings = :amount WHERE userId = :id")
     void upDateSavings(String id, Integer amount);
+
+    @Query("SELECT * From user_table")
+    LiveData<List<User>> allUsers();
 }

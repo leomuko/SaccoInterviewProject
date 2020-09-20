@@ -17,17 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sacco.R;
-import com.example.sacco.activities.SignIn.SignInViewModel;
+import com.example.sacco.helpers.UsersViewModel;
 import com.example.sacco.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
 
-    private SignInViewModel mSignInViewModel;
+    private UsersViewModel mUsersViewModel;
     private TextView mAmountSaved;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private String userRole;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CardView savingsCard = findViewById(R.id.savingsCardView);
+        CardView groupCard = findViewById(R.id.groupCardView);
         mAmountSaved = findViewById(R.id.amountSaved);
 
         initialiseViewModel();
@@ -48,17 +49,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SavingsActivity.class));
             }
         });
+        groupCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: " + userRole);
+                if(userRole.equals("member")){
+                    Toast.makeText(MainActivity.this, "This can only be accessed by the admin", Toast.LENGTH_SHORT).show();
+                }else{
+                    startActivity(new Intent(MainActivity.this, ContributionsActivity.class));
+                }
+            }
+        });
     }
     private void initialiseViewModel() {
-        mSignInViewModel = new ViewModelProvider(MainActivity.this).get(SignInViewModel.class);
+        mUsersViewModel = new ViewModelProvider(MainActivity.this).get(UsersViewModel.class);
     }
     private void fetchUserFromDatabase(String uid) {
-        mSignInViewModel.fetchNewUser(uid);
-        mSignInViewModel.currentUser.observe(MainActivity.this, new Observer<User>() {
+        mUsersViewModel.fetchNewUser(uid);
+        mUsersViewModel.currentUser.observe(MainActivity.this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
                 upDateUi(user);
-
+                userRole = user.getRole();
             }
         });
     }

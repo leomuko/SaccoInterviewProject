@@ -1,4 +1,4 @@
-package com.example.sacco.activities.SignIn;
+package com.example.sacco.helpers;
 
 import android.app.Application;
 
@@ -9,13 +9,16 @@ import androidx.lifecycle.LiveData;
 import com.example.sacco.helpers.SaccoRepository;
 import com.example.sacco.models.User;
 
-public class SignInViewModel extends AndroidViewModel {
+import java.util.List;
+
+public class UsersViewModel extends AndroidViewModel {
 
     private SaccoRepository mSaccoRepository;
 
     public LiveData<User> currentUser;
+    public LiveData<List<User>> mAllUsersList;
 
-    public SignInViewModel(@NonNull Application application) {
+    public UsersViewModel(@NonNull Application application) {
         super(application);
         mSaccoRepository = new SaccoRepository(application);
     }
@@ -26,5 +29,9 @@ public class SignInViewModel extends AndroidViewModel {
 
     public void fetchNewUser(String userId){
         currentUser = mSaccoRepository.getSavedUser(userId);
+    }
+
+    public void fetchAllUsers(){
+        mAllUsersList = mSaccoRepository.getAllUsers();
     }
 }

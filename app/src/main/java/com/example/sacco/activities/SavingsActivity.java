@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sacco.R;
-import com.example.sacco.activities.SignIn.SignInActivity;
 import com.example.sacco.helpers.SavingsAdapter;
+import com.example.sacco.helpers.SavingsViewModel;
 import com.example.sacco.models.Savings;
 import com.example.sacco.models.User;
 import com.google.firebase.auth.FirebaseAuth;

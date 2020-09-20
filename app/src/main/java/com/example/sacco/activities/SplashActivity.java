@@ -7,17 +7,16 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.sacco.R;
-import com.example.sacco.activities.SignIn.SignInViewModel;
+import com.example.sacco.helpers.UsersViewModel;
 import com.example.sacco.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private SignInViewModel mSignInViewModel;
+    private UsersViewModel mUsersViewModel;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static final String TAG = "SplashActivity";
 
@@ -42,11 +41,11 @@ public class SplashActivity extends AppCompatActivity {
         }, 3000);
     }
     private void initialiseViewModel() {
-        mSignInViewModel = new ViewModelProvider(SplashActivity.this).get(SignInViewModel.class);
+        mUsersViewModel = new ViewModelProvider(SplashActivity.this).get(UsersViewModel.class);
     }
     private void fetchUserFromDatabase(String uid) {
-        mSignInViewModel.fetchNewUser(uid);
-        mSignInViewModel.currentUser.observe(SplashActivity.this, new Observer<User>() {
+        mUsersViewModel.fetchNewUser(uid);
+        mUsersViewModel.currentUser.observe(SplashActivity.this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);

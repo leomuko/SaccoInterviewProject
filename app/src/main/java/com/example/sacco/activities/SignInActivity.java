@@ -1,4 +1,4 @@
-package com.example.sacco.activities.SignIn;
+package com.example.sacco.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sacco.R;
-import com.example.sacco.activities.LoginActivity;
-import com.example.sacco.activities.MainActivity;
+import com.example.sacco.helpers.UsersViewModel;
 import com.example.sacco.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignInActivity extends AppCompatActivity {
 
 
-    private SignInViewModel mSignInViewModel;
+    private UsersViewModel mUsersViewModel;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static final String TAG = "SignInActivity";
     ProgressDialog progressDialog ;
@@ -110,9 +109,9 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void saveUserToFirebase(User user) {
-        mSignInViewModel.saveTheNewUser(user);
-        mSignInViewModel.fetchNewUser(user.getUserId());
-        mSignInViewModel.currentUser.observe(SignInActivity.this, new Observer<User>() {
+        mUsersViewModel.saveTheNewUser(user);
+        mUsersViewModel.fetchNewUser(user.getUserId());
+        mUsersViewModel.currentUser.observe(SignInActivity.this, new Observer<User>() {
             @Override
             public void onChanged(User user1) {
                     progressDialog.dismiss();
@@ -124,7 +123,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void initialiseViewModel() {
-        mSignInViewModel = new ViewModelProvider(SignInActivity.this).get(SignInViewModel.class);
+        mUsersViewModel = new ViewModelProvider(SignInActivity.this).get(UsersViewModel.class);
     }
 
     @Override

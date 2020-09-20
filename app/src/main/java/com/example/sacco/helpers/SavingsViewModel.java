@@ -1,4 +1,4 @@
-package com.example.sacco.activities;
+package com.example.sacco.helpers;
 
 import android.app.Application;
 
