@@ -81,6 +81,7 @@ public class SignInActivity extends AppCompatActivity {
                                         newUser.setLastName(lastName);
                                         newUser.setRole("member");
                                         newUser.setUserId(uid);
+                                        newUser.setSavings(0);
                                         saveUserToFirebase(newUser);
                                         Log.d(TAG, "createUserWithEmail:success");
 

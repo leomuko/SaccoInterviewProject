@@ -58,11 +58,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
                 }else{
                     progressDialog.show();
+                    if(email.equals("admin@gmail.com")){
                     mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
+
                                         Log.d(TAG, "onComplete: success");
                                         String uid = mAuth.getCurrentUser().getUid();
                                         fetchUserFromDatabase(uid);
@@ -76,8 +78,11 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                }
+                }else{
 
+                    }
+
+            }
             }
         });
 
@@ -97,13 +102,25 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onChanged(User user) {
-                progressDialog.dismiss();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                Log.d(TAG, "onChanged: "+ user.getFirstName());
-                Toast.makeText(LoginActivity.this, "Logged in as "+ user.getFirstName() + " " + user.getLastName(),
-                        Toast.LENGTH_SHORT).show();
+                if(user == null){
+                    String uid = mAuth.getCurrentUser().getUid();
+                    User newUser = new User();
+                    newUser.setFirstName("Admin");
+                    newUser.setLastName("Admin");
+                    newUser.setRole("admin");
+                    newUser.setUserId(uid);
+                    newUser.setSavings(0);
+                    mUsersViewModel.saveTheNewUser(newUser);
+                    fetchUserFromDatabase(uid);
+                }else {
+                    progressDialog.dismiss();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Log.d(TAG, "onChanged: " + user.getFirstName());
+                    Toast.makeText(LoginActivity.this, "Logged in as " + user.getFirstName() + " " + user.getLastName(),
+                            Toast.LENGTH_SHORT).show();
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
     }

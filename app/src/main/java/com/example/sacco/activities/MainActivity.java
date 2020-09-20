@@ -72,14 +72,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(User user) {
                 upDateUi(user);
-                userRole = user.getRole();
+
             }
         });
     }
 
     private void upDateUi(User user) {
-        mAmountSaved.setText(user.getSavings().toString());
-        getSupportActionBar().setTitle("Hello there "+ user.getFirstName());
+        try {
+            mAmountSaved.setText(user.getSavings().toString());
+            getSupportActionBar().setTitle("Hello there "+ user.getFirstName());
+            userRole = user.getRole();
+        }catch (NullPointerException e){
+            mAmountSaved.setText("0");
+            userRole = "Admin";
+            getSupportActionBar().setTitle("Hello there ");
+        }
+
     }
 
     @Override

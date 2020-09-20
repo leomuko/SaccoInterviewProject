@@ -3,6 +3,7 @@ package com.example.sacco.db;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.sacco.models.User;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Dao
 public interface UserDao {
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void saveUser(User user);
 
     @Query("SELECT * From user_table WHERE userId = :id")

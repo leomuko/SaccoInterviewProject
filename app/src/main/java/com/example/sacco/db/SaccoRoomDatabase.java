@@ -2,9 +2,11 @@ package com.example.sacco.db;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.sacco.models.Savings;
 
@@ -39,5 +41,7 @@ public abstract class SaccoRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+
 
 }
