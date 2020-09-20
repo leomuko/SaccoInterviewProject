@@ -5,11 +5,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +22,14 @@ import android.widget.Toast;
 
 import com.example.sacco.R;
 import com.example.sacco.activities.SignIn.SignInActivity;
+import com.example.sacco.helpers.SavingsAdapter;
 import com.example.sacco.models.Savings;
 import com.example.sacco.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class SavingsActivity extends AppCompatActivity {
@@ -36,6 +41,10 @@ public class SavingsActivity extends AppCompatActivity {
     private TextView mCycles;
     private TextView mDeposits;
     private TextView mPayOut;
+    private RecyclerView mRecyclerView;
+    private SavingsAdapter mSavingsAdapter;
+    private static final String TAG = "SavingsActivity";
+    private int UserSavings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +58,10 @@ public class SavingsActivity extends AppCompatActivity {
         mCycles = findViewById(R.id.cycles);
         mDeposits = findViewById(R.id.deposits);
         mPayOut = findViewById(R.id.payout);
+        mRecyclerView = findViewById(R.id.savings_recycler);
+
         Button depositButton = findViewById(R.id.depositButton);
+
 
         initialiseViewModel();
         try {
@@ -101,18 +113,35 @@ public class SavingsActivity extends AppCompatActivity {
                 mSavedAmout.setText(String.valueOf(user.getSavings()));
                 mCycles.setText("1");
                 mPayOut.setText(String.valueOf(user.getSavings()));
+                UserSavings = user.getSavings();
             }
         });
         mSavingsViewModel.fetchAllUserSavings(uid);
-        mSavingsViewModel.numberOfDeposits.observe(SavingsActivity.this, new Observer<Integer>() {
+
+        mSavingsViewModel.allUserSavings.observe(SavingsActivity.this, new Observer<List<Savings>>() {
             @Override
-            public void onChanged(Integer integer) {
-                mDeposits.setText(String.valueOf(integer));
+            public void onChanged(List<Savings> savings) {
+                initialiseRecyclerView(savings);
+                mDeposits.setText(String.valueOf(savings.size()));
+                Log.d(TAG, "onChanged: "+ savings.size());
             }
         });
-
+        mSavingsViewModel.fecthAllSavings();
+        mSavingsViewModel.allSavings.observe(SavingsActivity.this, new Observer<List<Savings>>() {
+            @Override
+            public void onChanged(List<Savings> savings) {
+                for(Savings i : savings){
+                    Log.d(TAG, "onChanged: "+ i.getSavingsId());
+                }
+            }
+        });
     }
 
+    private void initialiseRecyclerView(List<Savings> savings) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(SavingsActivity.this));
+        mSavingsAdapter = new SavingsAdapter(SavingsActivity.this, savings);
+        mRecyclerView.setAdapter(mSavingsAdapter);
+    }
 
 
     private void saveToDatabase(Integer a) {
@@ -123,7 +152,9 @@ public class SavingsActivity extends AppCompatActivity {
         savings.setCycle(1);
         savings.setDate(date);
         mSavingsViewModel.depositSavings(savings);
-        mSavingsViewModel.upDateUserSavings(uid, a);
+        int totalAmount = UserSavings + a;
+        mSavingsViewModel.upDateUserSavings(uid, totalAmount);
+
 
         Toast.makeText(this, "A total Amount of "+ a + " has been saved to your account", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(SavingsActivity.this, MainActivity.class));

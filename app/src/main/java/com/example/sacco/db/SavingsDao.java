@@ -15,7 +15,9 @@ public interface SavingsDao {
     @Insert()
     void savingTransaction(Savings savings);
 
-    @Query("SELECT * From savings_table WHERE userId = :id")
+    @Query("SELECT * From savings_table WHERE userId =:id")
     LiveData<List<Savings>> fetchUserSavings(String id);
 
+    @Query("SELECT * From savings_table")
+    LiveData<List<Savings>> fetchAllSavings();
 }

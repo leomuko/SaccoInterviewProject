@@ -17,8 +17,8 @@ public class SavingsViewModel extends AndroidViewModel {
 
     private SaccoRepository mSaccoRepository;
     public LiveData<List<Savings>> allUserSavings;
-    public MutableLiveData<Integer> numberOfDeposits = new MutableLiveData<>();
     public LiveData<User> currentUser;
+    public LiveData<List<Savings>> allSavings;
 
     public SavingsViewModel(@NonNull Application application) {
         super(application);
@@ -31,12 +31,15 @@ public class SavingsViewModel extends AndroidViewModel {
 
     public void fetchAllUserSavings(String id){
         allUserSavings = mSaccoRepository.getUserSavings(id);
-        numberOfDeposits.postValue(allUserSavings.getValue().size());
     }
     public void upDateUserSavings(String id, Integer amount){
         mSaccoRepository.upDateUserSavings(amount, id);
     }
     public void fetchUser(String userId){
         currentUser = mSaccoRepository.getSavedUser(userId);
+    }
+
+    public void fecthAllSavings(){
+        allSavings = mSaccoRepository.getAllSavings();
     }
 }

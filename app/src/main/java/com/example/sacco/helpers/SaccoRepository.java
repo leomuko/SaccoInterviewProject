@@ -17,6 +17,7 @@ public class SaccoRepository {
     private LiveData<User> theUser;
     private SavingsDao mSavingsDao;
     private LiveData<List<Savings>> mUserSavings;
+    private LiveData<List<Savings>> mAllSavings;
 
 
     public SaccoRepository(Application application){
@@ -50,5 +51,11 @@ public class SaccoRepository {
             mUserDao.upDateSavings(userId, amount);
         });
     }
+
+    public  LiveData<List<Savings>> getAllSavings(){
+        mAllSavings = mSavingsDao.fetchAllSavings();
+        return  mAllSavings;
+    }
+
 
 }
