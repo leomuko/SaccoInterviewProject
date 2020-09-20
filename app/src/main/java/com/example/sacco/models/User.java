@@ -20,18 +20,23 @@ public class User {
     @NonNull
     @ColumnInfo(name = "role")
     private String Role;
+
     @NonNull
     @ColumnInfo(name = "savings")
     private Integer Savings;
 
+
     public User() {
     }
 
+
     public User(@NonNull String userId, @NonNull String firstName, @NonNull String lastName, @NonNull String role, @NonNull Integer savings) {
+
         UserId = userId;
         FirstName = firstName;
         LastName = lastName;
         Role = role;
+
         Savings = savings;
     }
 
@@ -44,6 +49,7 @@ public class User {
         UserId = userId;
     }
 
+
     @NonNull
     public String getFirstName() {
         return FirstName;
@@ -53,19 +59,23 @@ public class User {
         FirstName = firstName;
     }
 
+
     @NonNull
     public String getLastName() {
         return LastName;
     }
 
+
     public void setLastName(@NonNull String lastName) {
         LastName = lastName;
     }
+
 
     @NonNull
     public String getRole() {
         return Role;
     }
+
 
     public void setRole(@NonNull String role) {
         Role = role;

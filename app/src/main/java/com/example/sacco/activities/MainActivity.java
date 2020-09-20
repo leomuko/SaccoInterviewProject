@@ -1,5 +1,6 @@
 package com.example.sacco.activities;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String userRole;
     private static final String TAG = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_logout:
                 mAuth.signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
 
     }
 }

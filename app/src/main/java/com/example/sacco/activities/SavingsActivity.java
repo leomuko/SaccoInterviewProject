@@ -1,5 +1,6 @@
 package com.example.sacco.activities;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +45,9 @@ public class SavingsActivity extends AppCompatActivity {
     private SavingsAdapter mSavingsAdapter;
     private static final String TAG = "SavingsActivity";
     private int UserSavings;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,5 +170,6 @@ public class SavingsActivity extends AppCompatActivity {
             startActivity(new Intent(SavingsActivity.this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
+
     }
 }

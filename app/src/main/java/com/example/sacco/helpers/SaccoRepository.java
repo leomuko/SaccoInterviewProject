@@ -5,9 +5,11 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.sacco.db.SaccoRoomDatabase;
+
 import com.example.sacco.db.SavingsDao;
 import com.example.sacco.db.UserDao;
 import com.example.sacco.models.Savings;
+
 import com.example.sacco.models.User;
 
 import java.util.List;
@@ -15,15 +17,18 @@ import java.util.List;
 public class SaccoRepository {
     private UserDao mUserDao;
     private LiveData<User> theUser;
+
     private SavingsDao mSavingsDao;
     private LiveData<List<Savings>> mUserSavings;
     private LiveData<List<Savings>> mAllSavings;
     private LiveData<List<User>> mAllUsers;
 
 
+
     public SaccoRepository(Application application){
         SaccoRoomDatabase db = SaccoRoomDatabase.getDatabase(application);
         mUserDao = db.userDao();
+
         mSavingsDao = db.savingsDao();
     }
     public void saveNewUser(User user){
@@ -35,6 +40,7 @@ public class SaccoRepository {
        theUser =  mUserDao.fetchUser(id);
        return theUser;
     }
+
 
     public void makeDeposit(Savings savings){
         SaccoRoomDatabase.databaseWriteExecutor.execute(() ->{
@@ -62,6 +68,7 @@ public class SaccoRepository {
         mAllUsers = mUserDao.allUsers();
         return mAllUsers;
     }
+
 
 
 }

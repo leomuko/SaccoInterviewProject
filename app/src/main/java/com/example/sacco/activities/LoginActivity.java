@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.sacco.R;
 import com.example.sacco.helpers.UsersViewModel;
+
 import com.example.sacco.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static final String TAG = "LoginActivity";
+
     private UsersViewModel mUsersViewModel;
     ProgressDialog progressDialog ;
 
@@ -89,8 +91,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void fetchUserFromDatabase(String uid) {
+
         mUsersViewModel.fetchNewUser(uid);
         mUsersViewModel.currentUser.observe(LoginActivity.this, new Observer<User>() {
+
             @Override
             public void onChanged(User user) {
                 progressDialog.dismiss();
@@ -98,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "onChanged: "+ user.getFirstName());
                 Toast.makeText(LoginActivity.this, "Logged in as "+ user.getFirstName() + " " + user.getLastName(),
                         Toast.LENGTH_SHORT).show();
+
                 startActivity(intent);
             }
         });
@@ -106,5 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initialiseViewModel() {
         mUsersViewModel = new ViewModelProvider(LoginActivity.this).get(UsersViewModel.class);
+
     }
 }

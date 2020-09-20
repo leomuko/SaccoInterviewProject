@@ -11,12 +11,15 @@ import android.widget.Toast;
 
 import com.example.sacco.R;
 import com.example.sacco.helpers.UsersViewModel;
+
+
 import com.example.sacco.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {
 
     private UsersViewModel mUsersViewModel;
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static final String TAG = "SplashActivity";
 
@@ -51,6 +54,8 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 Toast.makeText(SplashActivity.this, "Logged in as "+ user.getFirstName() + " " + user.getLastName(),
                         Toast.LENGTH_SHORT).show();
+
+
                 startActivity(intent);
                 finish();
             }
